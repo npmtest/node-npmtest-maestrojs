@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-maestrojs/node_modules/maestrojs/lib/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-maestrojs">npmtest-maestrojs (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-maestrojs/node_modules/maestrojs/lib/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">16.33% <small>(16 / 98)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">4.17% <small>(1 / 24)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">17.78% <small>(16 / 90)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-maestrojs/node_modules/maestrojs/lib/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var redis = require("redis")
+var async = require("async");
+&nbsp;
+var Maestro = (function() {
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function Maestro(host, port, options) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    host = host || "127.0.0.1";</span>
+<span class="cstat-no" title="statement not covered" >    port = port || 6379;</span>
+<span class="cstat-no" title="statement not covered" >    options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.subscription = {};</span>
+<span class="cstat-no" title="statement not covered" >    self.subscriber = redis.createClient(port, host, options);</span>
+<span class="cstat-no" title="statement not covered" >    self.client = redis.createClient(port, host, options);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.subscriber.on("message", <span class="fstat-no" title="function not covered" >function(key, event) {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.resolve(self.subscription[key]);</span>
+    })
+&nbsp;
+  }
+&nbsp;
+  Maestro.prototype.use = <span class="fstat-no" title="function not covered" >function(service, setup) {</span>
+<span class="cstat-no" title="statement not covered" >    var key = '__keyspace@0__:'+service;</span>
+<span class="cstat-no" title="statement not covered" >    this.subscription[key] = { key: service, callback: setup, resolved: false };</span>
+<span class="cstat-no" title="statement not covered" >    this.subscriber.subscribe(key);</span>
+<span class="cstat-no" title="statement not covered" >    this.resolve(this.subscription[key], true);</span>
+  }
+&nbsp;
+  Maestro.prototype.resolve = <span class="fstat-no" title="function not covered" >function(service, ifExistsOnly) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+<span class="cstat-no" title="statement not covered" >    self.client.get(service.key, <span class="fstat-no" title="function not covered" >function(err, value) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (value !== null || !ifExistsOnly)</span>
+<span class="cstat-no" title="statement not covered" >        service.callback(JSON.parse(value));</span>
+<span class="cstat-no" title="statement not covered" >      service.resolved = value !== null;</span>
+<span class="cstat-no" title="statement not covered" >      self.tryStart();</span>
+    })
+  }
+&nbsp;
+  Maestro.prototype.register = <span class="fstat-no" title="function not covered" >function(service, options) {</span>
+<span class="cstat-no" title="statement not covered" >    this.service = service;</span>
+<span class="cstat-no" title="statement not covered" >    this.options = options;</span>
+<span class="cstat-no" title="statement not covered" >    this.tryRegister()</span>
+  }
+&nbsp;
+  Maestro.prototype.start = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    this.startCallback = callback;</span>
+<span class="cstat-no" title="statement not covered" >    this.tryStart();</span>
+  }
+&nbsp;
+  Maestro.prototype.tryStart = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    var service;</span>
+<span class="cstat-no" title="statement not covered" >    if (this.started || typeof this.startCallback !== "function") <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >    for (var key in this.subscription) {</span>
+<span class="cstat-no" title="statement not covered" >      service = this.subscription[key];</span>
+<span class="cstat-no" title="statement not covered" >      if (!service.resolved) <span class="cstat-no" title="statement not covered" >return false;</span></span>
+    };
+<span class="cstat-no" title="statement not covered" >    this.started = true;</span>
+<span class="cstat-no" title="statement not covered" >    this.startCallback();</span>
+<span class="cstat-no" title="statement not covered" >    this.tryRegister();</span>
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+  }
+&nbsp;
+  Maestro.prototype.tryRegister = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+<span class="cstat-no" title="statement not covered" >    if (!self.started || self.registered || typeof self.service !== "string" || typeof self.options !== "object") <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="fstat-no" title="function not covered" >    function atomicRegister() {</span>
+<span class="cstat-no" title="statement not covered" >      self.client.get(self.service, <span class="fstat-no" title="function not covered" >function(err, value) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var entries = JSON.parse(value) || [];</span>
+<span class="cstat-no" title="statement not covered" >        entries.push(self.options);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var luaScript = "\</span>
+        if (redis.call('get', KEYS[1]) == ARGV[1]) or (ARGV[3] == '0' and redis.call('exists', KEYS[1]) == 0) then\
+          return redis.call('set', KEYS[1], ARGV[2])\
+        else\
+          return 1\
+        end"
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        self.client.eval(</span>
+          [
+            luaScript, 3,
+            self.service,                   // KEYS[1]
+            "value",                        // KEYS[2]
+            "length",                       // KEYS[3]
+            value,                          // ARGV[1]
+            JSON.stringify(entries),        // ARGV[2]
+            (JSON.parse(value)||[]).length  // ARGV[3]
+          ],
+<span class="fstat-no" title="function not covered" >          function(err, val) {</span>
+<span class="cstat-no" title="statement not covered" >            if (val !== 'OK')</span>
+<span class="cstat-no" title="statement not covered" >              atomicRegister();</span>
+          }
+        );
+      });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.registered = true;</span>
+<span class="cstat-no" title="statement not covered" >    self.options.__id = (new Date()).getTime() + ":" + Math.floor(Math.random()*1000000)</span>
+<span class="cstat-no" title="statement not covered" >    atomicRegister();</span>
+  }
+&nbsp;
+  Maestro.prototype.unregister = <span class="fstat-no" title="function not covered" >function(cb) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof this.service !== "string" || typeof this.options !== "object") {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof cb === "function") <span class="cstat-no" title="statement not covered" >cb();</span></span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function atomicUnregister(service, id) {</span>
+<span class="cstat-no" title="statement not covered" >      self.client.get(service, <span class="fstat-no" title="function not covered" >function(err, value) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var currEntries = JSON.parse(value) || [];</span>
+<span class="cstat-no" title="statement not covered" >        var entries = []</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; currEntries.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >          if (currEntries[i].__id != id)</span>
+<span class="cstat-no" title="statement not covered" >            entries.push(currEntries[i]);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var luaScript = "\</span>
+        if (redis.call('get', KEYS[1]) == ARGV[1]) then\
+          return redis.call('set', KEYS[1], ARGV[2])\
+        elseif (redis.call('exists', KEYS[1]) == 0) then\
+          return 'OK'\
+        else\
+          return 1\
+        end"
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        self.client.eval(</span>
+          [
+            luaScript, 2,
+            service,                        // KEYS[1]
+            "value",                        // KEYS[2]
+            value,                          // ARGV[1]
+            JSON.stringify(entries),        // ARGV[2]
+          ],
+<span class="fstat-no" title="function not covered" >          function(err, val) {</span>
+<span class="cstat-no" title="statement not covered" >            if (val !== 'OK') {</span>
+<span class="cstat-no" title="statement not covered" >              atomicUnregister(service, id);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              self.registered = false;</span>
+<span class="cstat-no" title="statement not covered" >              if (typeof cb === "function") <span class="cstat-no" title="statement not covered" >cb();</span></span>
+            }
+          }
+        );
+      });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    atomicUnregister(this.service, this.options.__id)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.service = null;</span>
+<span class="cstat-no" title="statement not covered" >    this.options = null;</span>
+  }
+&nbsp;
+  Maestro.prototype.quit = <span class="fstat-no" title="function not covered" >function(cb) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (self.exited) {</span>
+<span class="cstat-no" title="statement not covered" >      cb();</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    async.waterfall([</span>
+<span class="fstat-no" title="function not covered" >      function(cb) {</span> <span class="cstat-no" title="statement not covered" >self.unregister(cb) }</span>,
+<span class="fstat-no" title="function not covered" >      function(cb) {</span> <span class="cstat-no" title="statement not covered" >self.subscriber.quit(<span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >cb(null); </span>}) }</span>,
+<span class="fstat-no" title="function not covered" >      function(cb) {</span> <span class="cstat-no" title="statement not covered" >self.client.quit(<span class="fstat-no" title="function not covered" >function() {</span> <span class="cstat-no" title="statement not covered" >cb(null); </span>}) }</span>
+    ], <span class="fstat-no" title="function not covered" >function(err, results) {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof cb === "function") <span class="cstat-no" title="statement not covered" >cb();</span></span>
+<span class="cstat-no" title="statement not covered" >      self.exited = true;</span>
+    })
+  }
+&nbsp;
+  return Maestro;
+&nbsp;
+})();
+&nbsp;
+exports = module.exports = Maestro;
+&nbsp;
+&nbsp;
+// maestro = new Maestro();
+// // client = maestro.subscriber;
+&nbsp;
+// maestro.register("services.api", { a: 1 })
+&nbsp;
+// maestro.start(function() {})
+&nbsp;
+&nbsp;
+// setTimeout(function() {
+//   maestro.quit();
+// }, 5000)
+&nbsp;
+// client.on("message", function(pattern, channel, value) {
+//   console.log(pattern, channel, "=&gt;", value);
+// });
+&nbsp;
+&nbsp;
+// client.subscribe('__keyspace@0__:services.test');
+// client.set("test", 2)
+&nbsp;
+&nbsp;
+&nbsp;
+// setTimeout(client.quit.apply(client), 10000)
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 06:42:57 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
